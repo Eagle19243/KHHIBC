@@ -1,0 +1,43 @@
+{
+  "name": "khhibc",
+  "version": "1.0.0",
+  "description": "KHHIBC Parser",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eagle19243/KHHIBC.git"
+  },
+  "keywords": [
+    "khhibc",
+    "npm"
+  ],
+  "author": "Eagle19243",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eagle19243/KHHIBC/issues"
+  },
+  "homepage": "https://github.com/Eagle19243/KHHIBC/blob/master/README.md",
+  "devDependencies": {
+    "aliasify": "^2.1.0",
+    "browserify": "^15.2.0",
+    "chai": "^2.2.0",
+    "grunt": "1.0.1",
+    "grunt-browserify": "^5.2.0",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-uglify": "^3.3.0",
+    "istanbul": "^0.3.6",
+    "jshint": "^2.6.0",
+    "mocha": "^2.1.0",
+    "pre-commit": "^1.0.4",
+    "should": "^5.2.0",
+    "sinon": "^1.12.2"
+  },
+  "browserify": {
+    "transform": [
+      "aliasify"
+    ]
+  }
+}

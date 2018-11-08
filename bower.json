@@ -1,0 +1,22 @@
+{
+  "name": "khhibc",
+  "main": "dist/khhibc.min.js",
+  "version": "1.0.6",
+  "homepage": "https://github.com/Eagle19243/KHHIBC/blob/master/README.md",
+  "authors": [
+    "Eagle19243"
+  ],
+  "keywords": [
+    "khhibc",
+    "npm"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "index.js",
+    "Gruntfile.js",
+    "package.json"
+  ]
+}
