@@ -249,7 +249,8 @@ var KHHIBC = {
 
             var supplementalComponents = secondaryComponents.slice(1)
 
-            for(var supplementalComponent in supplementalComponents) {
+            for(var idx in supplementalComponents) {
+                var supplementalComponent = supplementalComponents[idx]
                 if (supplementalComponent.substr(0, 3) === "14D") {
                     this.expirationDate = moment(supplementalComponent.substr(3), "YYYYMMDD").toDate()
                 } else if (supplementalComponent.substr(0, 3) === "16D") {
