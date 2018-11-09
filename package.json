@@ -4,7 +4,6 @@
   "description": "KHHIBC Parser",
   "main": "src/index.js",
   "scripts": {
-    "start" : "node examples/index.js",
     "build": "grunt"
   },
   "repository": {

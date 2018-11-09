@@ -161,7 +161,7 @@ var KHHIBC = {
 
         if (this.isNumber(firstChar)) {
             var julianString = secondary.substr(0, 5)
-            this.expirationDate = moment(julianString, "YYDDD")
+            this.expirationDate = moment(julianString, "YYDDD").toDate()
             secondary = secondary.substr(5)
             this.checkCharacter = secondary[secondary.length-1]
 
@@ -251,9 +251,9 @@ var KHHIBC = {
 
             for(var supplementalComponent in supplementalComponents) {
                 if (supplementalComponent.substr(0, 3) === "14D") {
-                    this.expirationDate = moment(supplementalComponent.substr(3), "YYYYMMDD")
+                    this.expirationDate = moment(supplementalComponent.substr(3), "YYYYMMDD").toDate()
                 } else if (supplementalComponent.substr(0, 3) === "16D") {
-                    this.manufacturingDate = moment(supplementalComponent.substr(3), "YYYYMMDD")
+                    this.manufacturingDate = moment(supplementalComponent.substr(3), "YYYYMMDD").toDate()
                 } else if (supplementalComponent[0] == "S") {
                     this.serial = supplementalComponent.substr(1)
                 }
@@ -271,27 +271,27 @@ var KHHIBC = {
 
             case 1: {
                 var dateString = string.substr(0, 4)
-                return moment(dateString, "MMYY")
+                return moment(dateString, "MMYY").toDate()
             }
             case 2: {
                 var dateString = string.substr(1, 6)
-                return moment(dateString, "MMDDYY")
+                return moment(dateString, "MMDDYY").toDate()
             }
             case 3: {
                 var dateString = string.substr(1, 6)
-                return moment(dateString, "YYMMDD")
+                return moment(dateString, "YYMMDD").toDate()
             }
             case 4: {
                 var dateString = string.substr(1, 8)
-                return moment(dateString, "YYMMDDHH")
+                return moment(dateString, "YYMMDDHH").toDate()
             }
             case 5: {
                 var dateString = string.substr(1, 5)
-                return moment(dateString, "YYDDD")
+                return moment(dateString, "YYDDD").toDate()
             }
             case 6: {
                 var dateString = string.substr(1, 7)
-                return moment(dateString, "YYDDDHH")
+                return moment(dateString, "YYDDDHH").toDate()
             }
             case 7: {
                 return null

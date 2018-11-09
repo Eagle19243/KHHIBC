@@ -1,4 +1,4 @@
 var khhibc = require('../src/index')
-var obj = khhibc.decode("+M4400700080/$$3200430PRLU18C51")
+var obj = khhibc.decode("+D7681031010700/$$31904281647801")
 console.log(obj)
 console.log(obj.deviceID())
