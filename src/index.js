@@ -274,23 +274,23 @@ var KHHIBC = {
                 return moment(dateString, "MMYY")
             }
             case 2: {
-                var dateString = string.substr(0, 6)
+                var dateString = string.substr(1, 6)
                 return moment(dateString, "MMDDYY")
             }
             case 3: {
-                var dateString = string.substr(0, 6)
+                var dateString = string.substr(1, 6)
                 return moment(dateString, "YYMMDD")
             }
             case 4: {
-                var dateString = string.substr(0, 8)
+                var dateString = string.substr(1, 8)
                 return moment(dateString, "YYMMDDHH")
             }
             case 5: {
-                var dateString = string.substr(0, 5)
+                var dateString = string.substr(1, 5)
                 return moment(dateString, "YYDDD")
             }
             case 6: {
-                var dateString = string.substr(0, 7)
+                var dateString = string.substr(1, 7)
                 return moment(dateString, "YYDDDHH")
             }
             case 7: {

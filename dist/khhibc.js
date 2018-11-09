@@ -4564,19 +4564,18 @@ var KHHIBC = {
             var primary = this.hibcForPrimaryString(array[0], KHHIBCBarcodeType.KHHIBCBarcodeTypeConcatenated)
             var secondary = this.hibcForSecondaryString(array[1] + lastTwo, KHHIBCBarcodeType.KHHIBCBarcodeTypeConcatenated)
 
-            var hibc = {}
-            hibc.barcodeType = KHHIBCBarcodeType.KHHIBCBarcodeTypeConcatenated
-            hibc.labelerIDCode = primary.labelerIDCode
-            hibc.productNumber = primary.productNumber
-            hibc.unitOfMeasure = primary.unitOfMeasure
-            hibc.linkCharacter = secondary.linkCharacter
-            hibc.checkCharacter = secondary.checkCharacter
-            hibc.expirationDate = secondary.expirationDate
-            hibc.quantity = secondary.quantity
-            hibc.serial = secondary.serial
-            hibc.lot = secondary.lot
-            
-            return hibc
+            this.barcodeType = KHHIBCBarcodeType.KHHIBCBarcodeTypeConcatenated
+            this.labelerIDCode = primary.labelerIDCode
+            this.productNumber = primary.productNumber
+            this.unitOfMeasure = primary.unitOfMeasure
+            this.linkCharacter = secondary.linkCharacter
+            this.checkCharacter = secondary.checkCharacter
+            this.expirationDate = secondary.expirationDate
+            this.quantity = secondary.quantity
+            this.serial = secondary.serial
+            this.lot = secondary.lot
+
+            return this
         } else {
             return null
         }
@@ -4623,22 +4622,21 @@ var KHHIBC = {
             return null
         }
 
-        var hibc = {}
-        hibc.barcodeType = barcodeType
-        hibc.labelerIDCode = primary.substr(0, 4)
+        this.barcodeType = barcodeType
+        this.labelerIDCode = primary.substr(0, 4)
         primary = primary.substr(4, primary.length - 4)
-        hibc.productNumber = primary.substr(0, primary.length - 
+        this.productNumber = primary.substr(0, primary.length - 
             (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypePrimary ? 2 : 1))
         primary = primary.substr(primary.length - 
             (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypePrimary ? 2 : 1),
             (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypePrimary ? 2 : 1))
-        hibc.unitOfMeasure = parseInt(primary[0])
+        this.unitOfMeasure = parseInt(primary[0])
 
         if (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypePrimary) {
-            hibc.checkCharacter = primary[1]
+            this.checkCharacter = primary[1]
         }
 
-        return hibc
+        return this
     },
 
     hibcForSecondaryString: function(secondary, barcodeType) {
@@ -4647,8 +4645,7 @@ var KHHIBC = {
             return component.length > 0
         })
 
-        var hibc = {}
-        hibc.barcodeType = barcodeType
+        this.barcodeType = barcodeType
 
         if (secondaryComponents.length > 1) {
             var lastComponent = secondaryComponents[secondaryComponents.length - 1]
@@ -4667,66 +4664,66 @@ var KHHIBC = {
             }
         }
 
-        firstChar = secondary[0]
-        secondChar = secondary[1]
-        thirdChar = secondary[2]
+        var firstChar = secondary[0]
+        var secondChar = secondary[1]
+        var thirdChar = secondary[2]
 
         if (this.isNumber(firstChar)) {
             var julianString = secondary.substr(0, 5)
-            hibc.expirationDate = moment(julianString, "YYDDD")
+            this.expirationDate = moment(julianString, "YYDDD")
             secondary = secondary.substr(5)
-            hibc.checkCharacter = secondary[secondary.length-1]
+            this.checkCharacter = secondary[secondary.length-1]
 
             if (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypeSecondary) {
-                hibc.linkCharacter = secondary[secondary.length-2]
-                hibc.lot = secondary.substr(0, secondary.length-2)
+                this.linkCharacter = secondary[secondary.length-2]
+                this.lot = secondary.substr(0, secondary.length-2)
             } else {
-                hibc.lot = secondary.substr(0, secondary.length-1)
+                this.lot = secondary.substr(0, secondary.length-1)
             }
 
         } else if (firstChar === "$" && this.isAlphanumeric(secondChar)) {
-            hibc.checkCharacter = secondary[secondary.length-1]
+            this.checkCharacter = secondary[secondary.length-1]
 
             if (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypeSecondary) {
-                hibc.linkCharacter = secondary[secondary.length-2]
-                hibc.lot = secondary.substr(1, secondary.length-3)
+                this.linkCharacter = secondary[secondary.length-2]
+                this.lot = secondary.substr(1, secondary.length-3)
             } else {
-                hibc.lot = secondary.substr(1, secondary.length-2)
+                this.lot = secondary.substr(1, secondary.length-2)
             }
         } else if (secondary.substr(0,2) === "$+" && this.isAlphanumeric(thirdChar)) {
             secondary = secondary.replace(/\$/g, "")
             secondary = secondary.replace(/\+/g, "")
-            hibc.checkCharacter = secondary[secondary.length-1]
+            this.checkCharacter = secondary[secondary.length-1]
 
             if (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypeSecondary) {
-                hibc.linkCharacter = secondary[secondary.length-2]
-                hibc.serial = secondary.substr(0, secondary.length-2)
+                this.linkCharacter = secondary[secondary.length-2]
+                this.serial = secondary.substr(0, secondary.length-2)
             } else {
-                hibc.serial = secondary.substr(0, secondary.length-1)
+                this.serial = secondary.substr(0, secondary.length-1)
             }
         } else if (secondary.substr(0,2) === "$$" && this.isAlphanumeric(thirdChar)) {
             secondary = secondary.replace(/\$/g, "")
-            hibc.checkCharacter = secondary[secondary.length-1]
+            this.checkCharacter = secondary[secondary.length-1]
 
             if (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypeSecondary) {
-                hibc.linkCharacter = secondary[secondary.length-2]
-                hibc.serial = secondary.substr(0, secondary.length-2)
+                this.linkCharacter = secondary[secondary.length-2]
+                secondary = secondary.substr(0, secondary.length-2)
             } else {
-                hibc.serial = secondary.substr(0, secondary.length-1)
+                secondary = secondary.substr(0, secondary.length-1)
             }
 
             var i = parseInt(secondary[0])
             var noLot = false
             if (i == 8) {
                 secondary = secondary.substr(1, secondary.length-1)
-                hibc.quantity = parseInt(secondary.substr(0, 2))
+                this.quantity = parseInt(secondary.substr(0, 2))
                 secondary = secondary.substr(2, secondary.length-2)
                 if (secondary.length == 0) {
                     noLot = true
                 }
             } else if (i == 9) {
                 secondary = secondary.substr(1, secondary.length-1)
-                hibc.quantity = parseInt(secondary.substr(0, 5))
+                this.quantity = parseInt(secondary.substr(0, 5))
                 secondary = secondary.substr(5)
                 if (secondary.length == 0) {
                     noLot = true
@@ -4734,25 +4731,25 @@ var KHHIBC = {
             }
 
             if (!noLot) {
-                hibc.expirationDate = this.dateFromDateString(secondary)
+                this.expirationDate = this.dateFromDateString(secondary)
                 secondary = this.substringFromDateString(secondary)
-                hibc.lot = secondary
+                this.lot = secondary
             }
         } else if (secondary.substr(0, 3) === "$$+") {
             secondary = secondary.replace(/\$/g, "")
             secondary = secondary.replace(/\+/g, "")
-            hibc.checkCharacter = secondary[secondary.length-1]
+            this.checkCharacter = secondary[secondary.length-1]
 
             if (barcodeType == KHHIBCBarcodeType.KHHIBCBarcodeTypeSecondary) {
-                hibc.linkCharacter = secondary[secondary.length-2]
-                hibc.serial = secondary.substr(0, secondary.length-2)
+                this.linkCharacter = secondary[secondary.length-2]
+                this.serial = secondary.substr(0, secondary.length-2)
             } else {
-                hibc.serial = secondary.substr(0, secondary.length-1)
+                this.serial = secondary.substr(0, secondary.length-1)
             }
 
-            hibc.expirationDate = this.dateFromDateString(secondary)
+            this.expirationDate = this.dateFromDateString(secondary)
             secondary = this.substringFromDateString(secondary)
-            hibc.serial = secondary
+            this.serial = secondary
         } else {
             return null
         }
@@ -4763,16 +4760,16 @@ var KHHIBC = {
 
             for(var supplementalComponent in supplementalComponents) {
                 if (supplementalComponent.substr(0, 3) === "14D") {
-                    hibc.expirationDate = moment(supplementalComponent.substr(3), "YYYYMMDD")
+                    this.expirationDate = moment(supplementalComponent.substr(3), "YYYYMMDD")
                 } else if (supplementalComponent.substr(0, 3) === "16D") {
-                    hibc.manufacturingDate = moment(supplementalComponent.substr(3), "YYYYMMDD")
+                    this.manufacturingDate = moment(supplementalComponent.substr(3), "YYYYMMDD")
                 } else if (supplementalComponent[0] == "S") {
-                    hibc.serial = supplementalComponent.substr(1)
+                    this.serial = supplementalComponent.substr(1)
                 }
             }
         }
 
-        return hibc
+        return this
     },
 
     dateFromDateString: function(string) {
