@@ -39,7 +39,7 @@ var KHHIBC = {
 
         var lastTwo = barcode.substr(barcode.length - 2, 2)
         barcode = barcode.substr(0, barcode.length - 2)
-        var array = barcode.split("/", 2)
+        var array = this.splitWithLimit(barcode, "/", 2)
 
         if (array.length == 1) {
             var barcodeData = array[0] + lastTwo
@@ -335,6 +335,27 @@ var KHHIBC = {
 
     isLetter: function(string) {
         return /^[a-zA-Z]+$/.test(string);
+    },
+
+    splitWithLimit: function(str, separator , limit){
+        //Similar to str.split but combines the remaining components in the last component
+
+        var allComponents = str.split(separator);
+        var components = [];
+
+        for(var i = 0; i < allComponents.length; i++){
+            var s = allComponents[i];
+            if(components.length < limit){
+                components.push(s);
+            } else {
+                //We hit our limit, append to the last component
+                var lastComponent = components[1];
+                lastComponent = lastComponent + separator + s;
+                components[i - 1] = lastComponent;
+            }
+        }
+
+        return components;
     }
 }
 
